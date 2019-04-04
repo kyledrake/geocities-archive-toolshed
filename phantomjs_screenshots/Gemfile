@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'phantomjs'
+gem 'concurrent-ruby'
+gem 'pry-byebug'
+gem 'mini_magick'
