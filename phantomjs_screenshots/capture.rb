@@ -1,13 +1,3 @@
-# This lil' script generates the screenshots for the processed geocities archive using PhantomJS.
-# We've got millions of these go to through, so we're parallelizing the PhantomJS operations,
-# which are largely IO/wait bound. You may need to adjust the thread count.
-#
-# (deps: ruby, imagemagick)
-#
-# gem install bundler
-# bundle install
-# bundle exec ruby capture.rb
-
 if ARGV.length != 2
   puts "usage: capture.rb base_path source_dir dest_dir"
 end
