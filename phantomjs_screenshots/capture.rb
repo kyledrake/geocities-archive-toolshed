@@ -17,6 +17,9 @@ SOURCE_DIR = ARGV[1] # www.geocities.com
 DEST_DIR = ARGV[2] # /var/www/html/screenshots
 THREAD_COUNT = 30
 
+# Prime the PhantomJS install
+Phantomjs.path
+
 pool = Concurrent::ThreadPoolExecutor.new(
    min_threads: THREAD_COUNT,
    max_threads: THREAD_COUNT,
