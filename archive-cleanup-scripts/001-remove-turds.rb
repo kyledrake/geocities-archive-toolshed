@@ -1,13 +1,13 @@
-=begin
-  This script removes the Geocities embedded server turds. They're useless now, everybody hated them then, and I feel a special kind of gratification getting rid of them.
-=end
+# This script removes the Geocities embedded server turds.
+# They're useless now, everybody hated them then, and I
+# feel a special kind of gratification getting rid of them.
 
 require 'find'
 require 'fileutils'
 require 'pry'
 
 if ARGV.length != 1
-  puts "usage: capture.rb archive_path"
+  puts "usage: 001-remove-turds.rb archive_path"
   exit
 end
 
