@@ -1,4 +1,4 @@
-equire 'fileutils'
+require 'fileutils'
 
 # This particular filename is causing file traverse issues, fix.
 # It wasn't working for the web site anyways, so fix that too.
