@@ -6,7 +6,7 @@ require 'pry'
 require 'digest'
 
 if ARGV.length != 4
-  puts "usage: 002-find-missing-files.rb archive_path sudir_path missing-files.txt checkpoint.txt"
+  puts "usage: 002-find-missing-files.rb archive_path subdir_path missing-files.txt checkpoint.txt"
   exit
 end
 
@@ -96,8 +96,8 @@ Find.find(File.join(ARCHIVE_PATH, SUBDIR_PATH)) do |path|
   links = (file.scan(/src\s*=\s*"(.+?)"/) + file.scan(/href\s*=\s*"(.+?)"/)).flatten
 
   links.each do |link|
-    # rip out anchors
-    link.gsub! /#.+$/, ''
+    # rip out anchors and query strings
+    link.gsub! /#.+$|\?.+$/, ''
 
     # decode urlencoded space at eol?
     link.gsub! /\/%20$/, ' '
