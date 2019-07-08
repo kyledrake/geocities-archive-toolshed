@@ -3,7 +3,7 @@
 
 ---
 
-Area51: [Atlantis, Aurora, Capsule, Cavern, Chamber, Comet, Corridor, Crater, Dimension, Dreamworld, Dunes, Dungeon, Holw, Hollow, Jupiter, Keep, Labyrinth, Lair, Matrix, Meteor, Nebula, Neptune, Nova, Omega, Orion, Planet, Portal, Quadrant, Quark, Quasar, Rampart, Realm, Saturn, Shadowlands, Shire, Shuttle, Stargate, Starship, Station, Underworld, Vault, Zone]
+Area51: [Alien, Atlantis, Aurora, Capsule, Cavern, Chamber, Comet, Corridor, Crater, Dimension, Dreamworld, Dunes, Dungeon, Hole, Hollow, Jupiter, Keep, Labyrinth, Lair, Matrix, Meteor, Nebula, Neptune, Nova, Omega, Orion, Planet, Portal, Quadrant, Quark, Quasar, Rampart, Realm, Saturn, Shadowlands, Shire, Shuttle, Stargate, Starship, Station, Underworld, Vault, Zone]
 
 Athens: [Academy, Acropolis, Aegean, Agora, Atlantis, Atrium, Bridge, Column, Crete, Cyprus, Delphi, Forum, Ithaca, Library, Marathon, Marble, Olympus, Oracle, Pantheon, Parthenon, Rhodes, Sparta, Stage, Styx, Thebes, Troy]
 
@@ -15,7 +15,7 @@ BourbonStreet: [Bayou, Canal, Delta, Inn, Quarter, Square]
 
 Broadway: [Alley, Balcony, Booth, Lobby, Orchestra, Stage, Wing]
 
-CapeCanaveral: [Campus, Cockpit, Galaxy, Hall, Hangar, Lab, LaunchPad, Orbit, Runway, Station]
+CapeCanaveral: [Campus, Cockpit, Galaxy, Hall, Hangar, Lab, Launchpad, Orbit, Runway, Station]
 
 CapitolHill: [Booth, Congress, Embassy, House, Lobby, Parliament, Rotunda, Senate]
 
@@ -63,18 +63,19 @@ SiliconValley: [Bay, Bit, Board, Bridge, Byte, Cable, Campus, Chip, Circuit, Cod
 
 SoHo: [Atrium, Bistro, Cafe, Canvas, Coffeehouse, Courtyard, Den, Easel, Exhibit, Gallery, Hall, Lofts, Museum, Nook, Opening, Palette, Park, Rooftop, Square, Studios, Study, Suite, Veranda, Village, Workshop]
 
-SouthBeach: [Balcony, Bay, Bluffs, Boardwalk, Breakers, Bungalow, Cabana, Canal, Cape, Castle, Channel, Cliffs, Club, Coast, Cove, Disco, Docks, Dunes, Gulf, Harbor, Inlet, Island, Jetty, Keys, Lagoon, Lights, Lounge, Mansion, Marina, Palms, Patio, Peir, Plateau, Pointe, Port, Reef, Sandbar, Sands, Shores, Strand, Suite, Surf, Terrace, Tidepool, Wharf]
+SouthBeach: [Balcony, Bay, Bluffs, Boardwalk, Breakers, Bungalow, Cabana, Canal, Cape, Castle, Channel, Cliffs, Club, Coast, Cove, Disco, Docks, Dunes, Gulf, Harbor, Inlet, Island, Jetty, Keys, Lagoon, Lights, Lounge, Mansion, Marina, Palms, Patio, Pier, Plateau, Pointe, Port, Reef, Sandbar, Sands, Seaside, Shores, Strand, Suite, Surf, Terrace, Tidepool, Wharf]
 
 SunsetStrip: [Alley, Amphitheatre, Arena, Auditorium, Backstage, Balcony, Bar, Basement, Bass, Beat, Birdland, Bistro, Booth, Cabaret, Club, Concert, Derby, Diner, Disco, Event, Exhibit, Festival, Floor, Frontrow, Gala, Garage, Hall, Hotel, Limo, Lobby, Loft, Loge, Lounge, Mezzanine, Palace, Palladium, Palms, Pavilion, Performance, Pit, Plaza, Scene, Set, Show, Stadium, Stage, Street, Studio, Tempo, Theater, Towers, Underground, Venue, Villa, Vine]
 
 TelevisionCity: [Broadcast, Lot, Network, Satellite, Set, Stage, Station, Studio, Taping]
 
-TheTropics: [Bay, Beach, Cabana, Coast, Cove, Equator, Harbor, Island, Lagoon, Paradise, Reef, Resort, Shores]
+TheTropics: [Bay, Beach, Breakers, Cabana, Coast, Cove, Equator, Harbor, Island, Lagoon, Paradise, Reef, Resort, Shores]
 
 TimesSquare: [Adventure, Alley, Arcade, Arena, Avatar, Battlefield, Bridge, Bunker, Castle, Cauldron, Cave, Cavern, Chamber, Chaos, Chasm, Corner, Corridor, Dome, Dragon, Dungeon, Fortress, Frontier, Galaxy, Hangar, Hero, Labyrinth, Lair, Legend, Maze, Metro, Portal, Realm, Ring, Stadium, Tower, Zone]
 
 Tokyo: [Bay, Blossom, Bridge, Club, Courtyard, Dojo, Field, Flats, Fountain, Fuji, Garden, Ginza, Gulf, Harbor, Highrise, Island, Lights, Market, Pagoda, Palace, Shores, Shrine, Spa, Springs, Subway, Teahouse, Temple, Towers, Villa]
-Vienna: [Choir, Opera, Stage, Strasse, Studio]
+
+Vienna: [Choir, Opera, Stage, Strasse, Studio, Theatre, Waltz]
 
 WallStreet: [Bank, Bureau, District, Exchange, Floor, Fund, Highrise, Market, Stock]
 
