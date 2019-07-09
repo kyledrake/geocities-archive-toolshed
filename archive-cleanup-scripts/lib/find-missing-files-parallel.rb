@@ -92,7 +92,7 @@ Find.find(File.join(ARCHIVE_PATH, SUBDIR_PATH)) do |path|
   file = IO.binread path
 
   # suck out href and src values.. this may not be complete!
-  links = (file.scan(/src\s*=\s*"(.+?)"/) + file.scan(/href\s*=\s*"(.+?)"/)).flatten
+  links = (file.scan(/src\s*=\s*["'](.+?)["']/) + file.scan(/href\s*=\s*["'](.+?)["']/)).flatten
 
   links.each do |link|
     # rip out anchors and query strings
