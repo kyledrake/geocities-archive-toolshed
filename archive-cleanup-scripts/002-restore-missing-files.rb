@@ -4,7 +4,6 @@
 require 'fileutils'
 require 'json'
 require 'http'
-require 'pry'
 require 'concurrent-ruby'
 
 # Documentation for this API: https://archive.org/help/wayback_api.php
