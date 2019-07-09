@@ -2,7 +2,6 @@
 require 'yaml'
 require 'find'
 require 'addressable'
-require 'pry'
 require 'digest'
 
 if ARGV.length != 4
@@ -150,7 +149,7 @@ Find.find(File.join(ARCHIVE_PATH, SUBDIR_PATH)) do |path|
       uri.scheme = CANONICAL_SCHEME unless uri.scheme == CANONICAL_SCHEME
       uri.host   = CANONICAL_HOST   unless uri.host   == CANONICAL_HOST
     rescue => e
-      binding.pry
+      puts "error: #{e.inspect}"
     end
 
     # skip dotfiles
@@ -163,8 +162,6 @@ Find.find(File.join(ARCHIVE_PATH, SUBDIR_PATH)) do |path|
 
     # skip if we already have it.
     next if File.exist? file_path
-
-#  binding.pry if uri.to_s == 'http://www.geocities.com/tokyo/1236'
 
     begin
       $missing_files.write "#{file_path}\t#{uri}\n"
