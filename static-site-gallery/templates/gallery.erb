@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>The Geocities Gallery: <%= neighborhood %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <style>
+      .column {
+        padding: .4rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h3><%= neighborhood %></h3>
+      <div class="columns">
+        <% sites.each do |site| %>
+          <div class="column col-3 col-xs-12">
+            <div class="card">
+              <!--<div class="card-image"><img class="img-responsive" src="_assets/screenshots/<%= site[:relative_url] %>"></div>-->
+              <div class="card-image"><a href="http://geocities.gallery<%= site[:relative_url] %>"><img class="img-responsive" src="http://screenshots.geocities.gallery/www.geocities.com<%= site[:relative_url] %>/<%= site[:index_filename] %>.png"></a></div>
+              <div class="card-header">
+                <div class="card-title"><a href="http://geocities.gallery<%= site[:relative_url] %>"><%= site[:title] %></a></div>
+                <div class="card-subtitle text-gray"><small>www.geocities.com<%= site[:relative_url] %> (<%= site[:last_updated] %>)</small></div>
+              </div>
+              <!--<div class="card-body">derp</div>-->
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>
