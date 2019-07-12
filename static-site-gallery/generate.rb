@@ -2,10 +2,12 @@
 require 'erb'
 require 'find'
 require 'nokogiri'
+require 'yaml'
 require 'pry'
 
 unless ARGV.length == 1
   puts "usage: ruby generate.rb archive_path"
+  exit
 end
 
 ARCHIVE_PATH = ARGV[0]
@@ -15,14 +17,16 @@ NEIGHBORHOODS = YAML.load_file File.join('..', 'archive-cleanup-scripts', 'lib',
 FileUtils.mkdir_p ASSET_PATH
 FileUtils.cp_r '_assets', File.join(ASSET_PATH, '/')
 
-template = ERB.new File.read(File.join('templates', 'gallery.erb'))
+TEMPLATE = ERB.new File.read(File.join('templates', 'gallery.erb'))
 
-NEIGHBORHOODS.keys.each do |neighborhood|
+def generate_template(neighborhood)
+  neighborhood_path = File.join ARCHIVE_PATH, neighborhood
+  return nil unless Dir.exist? neighborhood_path
   sites = []
 
-  addresses = Dir.glob(ARCHIVE_PATH+'/'+neighborhood+'/*')
-              .collect {|a| a.gsub("#{ARCHIVE_PATH}/#{neighborhood}/", '')}
-              .select  {|a| !NEIGHBORHOODS[neighborhood].include?(a)}
+  addresses = Dir.glob(File.join(neighborhood_path, '/*'))
+              .collect {|a| a.gsub(File.join(neighborhood_path, '/'), '')}
+              .select  {|a| a.to_i != 0}
               .sort
 
   addresses.each do |address|
@@ -43,10 +47,17 @@ NEIGHBORHOODS.keys.each do |neighborhood|
     next if index_data.match(/have not moved in yet/) && index_data.match(/The description of my page is/)
     mtime = File.mtime index_path
 
-    html_doc = Nokogiri::HTML index_data
+    # TODO investigate syntax errors and find better fix
+    begin
+      html_doc = Nokogiri::HTML index_data
+    rescue Nokogiri::XML::SyntaxError
+      next
+    end
+
     titles = html_doc.css('title')
 
     title = titles.empty? ? "#{neighborhood}/#{address}" : titles[0].text
+    title = '(untitled)' if title.empty?
 
     sites << {
       relative_url: '/'+neighborhood+'/'+address,
@@ -57,5 +68,13 @@ NEIGHBORHOODS.keys.each do |neighborhood|
 
     #puts index_path
   end
-  File.write File.join(ARCHIVE_PATH, neighborhood, 'index.html'), template.result(binding)
+  index_write_path = File.join(ARCHIVE_PATH, neighborhood, 'index.html')
+  puts "writing to #{index_write_path}"
+  File.write index_write_path, TEMPLATE.result(binding)
 end
+
+NEIGHBORHOODS.keys.each do |neighborhood|
+  generate_template neighborhood
+  NEIGHBORHOODS[neighborhood].each {|sn| generate_template "#{neighborhood}/#{sn}"}
+end
+

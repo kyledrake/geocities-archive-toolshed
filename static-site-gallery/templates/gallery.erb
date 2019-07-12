@@ -9,26 +9,42 @@
       .column {
         padding: .4rem;
       }
+
+      body {
+        color: #FFFFFF;
+        background: #000000;
+      }
+      .card {
+        background: #000000;
+        border: .05rem solid #525252;
+      }
+      a, a:visited {
+        color: #FFFFFF;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h3><%= neighborhood %></h3>
+      <center>
+        <br>
+        <h1>The Geocities Gallery</h1>
+        <h2><%= neighborhood %></h2>
+      </center>
       <div class="columns">
         <% sites.each do |site| %>
           <div class="column col-3 col-xs-12">
             <div class="card">
-              <!--<div class="card-image"><img class="img-responsive" src="_assets/screenshots/<%= site[:relative_url] %>"></div>-->
-              <div class="card-image"><a href="http://geocities.gallery<%= site[:relative_url] %>"><img class="img-responsive" src="http://screenshots.geocities.gallery/www.geocities.com<%= site[:relative_url] %>/<%= site[:index_filename] %>.png"></a></div>
+              <div class="card-image"><a href="<%= site[:relative_url] %>" target="_blank"><img class="img-responsive" src="/_assets/screenshots<%= site[:relative_url] %>/<%= site[:index_filename] %>.png"></a></div>
               <div class="card-header">
-                <div class="card-title"><a href="http://geocities.gallery<%= site[:relative_url] %>"><%= site[:title] %></a></div>
-                <div class="card-subtitle text-gray"><small>www.geocities.com<%= site[:relative_url] %> (<%= site[:last_updated] %>)</small></div>
+                <div class="card-title text-ellipsis"><a href="<%= site[:relative_url] %>" target="_blank"><%= site[:title] %></a></div>
+                <div class="card-subtitle text-gray text-ellipsis"><small>www.geocities.com<%= site[:relative_url] %><br>Last modified: <%= site[:last_updated].strftime('%F') %></small></div>
               </div>
-              <!--<div class="card-body">derp</div>-->
             </div>
           </div>
         <% end %>
       </div>
+
+      <center><h2><br><a href="/">Home</a><br></h2></center>
     </div>
   </body>
 </html>
