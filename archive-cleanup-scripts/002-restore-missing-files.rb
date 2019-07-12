@@ -67,7 +67,7 @@ File.foreach(MISSING_FILES_LOG_PATH) do |line|
      raw_version_url = closest['url'].sub datetime_string, datetime_string+'id_'
      res = HTTP.get raw_version_url
      last_modified = Time.parse res.headers['X-Archive-Orig-Last-Modified']
-     FileUtils.mkdir_p File.extname(file_path)
+     FileUtils.mkdir_p File.dirname(file_path)
      IO.binwrite file_path, res
      FileUtils.touch file_path, mtime: last_modified
      puts "restored #{file_path} #{file_url}"
