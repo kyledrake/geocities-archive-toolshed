@@ -127,7 +127,11 @@ Find.find(File.join(ARCHIVE_PATH, SUBDIR_PATH)) do |path|
       if uri.path[0] == '/'
         file_path  = ARCHIVE_PATH + uri.path
       else
-        file_path = File.join File.dirname(path), uri.path
+        begin
+          file_path = File.join File.dirname(path), uri.path
+        rescue ArgumentError
+          next
+        end
         uri.path  = File.dirname(path).gsub(ARCHIVE_PATH, '') + '/' + uri.path
       end
     else # absolute path like http://www.geocities.com/Tokyo/2033/example.jpg
