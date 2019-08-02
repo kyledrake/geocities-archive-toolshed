@@ -1,4 +1,4 @@
-if ARGV.length != 2
+if ARGV.length != 3
   puts "usage: capture.rb base_path source_dir dest_dir"
   exit
 end
