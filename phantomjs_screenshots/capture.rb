@@ -1,5 +1,6 @@
 if ARGV.length != 2
   puts "usage: capture.rb base_path source_dir dest_dir"
+  exit
 end
 
 require 'rubygems'
@@ -23,7 +24,7 @@ HARD_TIMEOUT = 15
 # Prime the PhantomJS install
 Phantomjs.path
 
-if File.exist?('./bad-urls.txt')	
+if File.exist?('./bad-urls.txt')
   $bad_urls_read = File.readlines('./bad-urls.txt')
 else
   $bad_urls_read = []
