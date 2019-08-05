@@ -65,19 +65,16 @@ Find.find(ARGV[0]) do |path|
     out "#{url}: BAD\n"
     next
   end
-
   output_path = File.join(DEST_DIR, url+'.png')
 
-  if File.exist?(output_path)
-    out "#{url}: EXISTS\n"
-    next
-  end
-
+#  if File.exist?(output_path)
+#    out "#{url}: EXISTS\n"
+#    next
+#  end
   sleep 0.1 until pool.remaining_capacity > 0
 
   pool.post do
     `timeout -k 5 #{HARD_TIMEOUT} #{Phantomjs.path} ./screenshot.js http://#{url} #{output_path}`
-
     if !File.exist?(output_path)
       out "#{url}: NO IMAGE\n"
       write_bad_url url
