@@ -20,12 +20,15 @@ previous_line = nil
 def store(line)
   uri = Addressable::URI.parse line[2]
   file_path = File.join ARCHIVE_DIR, uri.path
-  #FileUtils.mkdir_p File.dirname(file_path)
 
-  if File.extname(uri.path) == '' && line[3] == 'text/html'
-    puts "#{File.join file_path, 'index.html'}\t#{uri}"
-  else
-    puts "#{file_path}\t#{uri.to_s}"
+  begin
+    if File.extname(uri.path) == '' && line[3] == 'text/html'
+      puts "#{File.join file_path, 'index.html'}\t#{uri}\t#{line[1]}"
+    else
+      puts "#{file_path}\t#{uri.to_s}\t#{line[1]}"
+    end
+  rescue Encoding::CompatibilityError
+    return nil
   end
 end
 
