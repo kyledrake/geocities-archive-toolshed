@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # https://github.com/internetarchive/wayback/blob/master/wayback-cdx-server/README.md
 # apt-get install wget
+# combine the files indo a single cdx and then run 001-build-filelist.rb
 require 'http'
 require 'pry'
 require 'addressable'
