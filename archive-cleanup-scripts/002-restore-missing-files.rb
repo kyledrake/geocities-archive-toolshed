@@ -47,7 +47,7 @@ File.foreach(MISSING_FILES_LOG_PATH) do |line|
 
   begin
     line.gsub! /\?.+$/, ''
-    file_path, file_url = line.split "\t"
+    file_path, file_url, timestamp = line.split "\t"
 
     if File.extname(file_path) == ''
       file_path = File.join file_path, 'index.html'
@@ -60,17 +60,23 @@ File.foreach(MISSING_FILES_LOG_PATH) do |line|
   next if File.exist? file_path
 
   pool.post {
-     api_res = JSON.parse HTTP.get(WAYBACK_AVAILABLE_URL, params: {url: file_url})
-     closest = api_res['archived_snapshots']['closest']
-     next if closest.nil?
-     datetime_string = closest['url'].match(/\/web\/(\d+)/).captures.first
-     raw_version_url = closest['url'].sub datetime_string, datetime_string+'id_'
-     res = HTTP.get raw_version_url
-     last_modified = Time.parse res.headers['X-Archive-Orig-Last-Modified']
-     FileUtils.mkdir_p File.dirname(file_path)
-     IO.binwrite file_path, res
-     FileUtils.touch file_path, mtime: last_modified
-     puts "restored #{file_path} #{file_url}"
+    if timestamp.nil?
+      api_res = JSON.parse HTTP.get(WAYBACK_AVAILABLE_URL, params: {url: file_url})
+      closest = api_res['archived_snapshots']['closest']
+      next if closest.nil?
+      datetime_string = closest['url'].match(/\/web\/(\d+)/).captures.first
+      raw_version_url = closest['url'].sub datetime_string, datetime_string+'id_'
+    else
+      raw_version_url = "https://web.archive.org/web/#{timestamp.strip}id_/#{file_url}"
+      file_path.downcase!
+    end
+
+    res = HTTP.get raw_version_url
+    last_modified = Time.parse res.headers['X-Archive-Orig-Last-Modified']
+    FileUtils.mkdir_p File.dirname(file_path)
+    IO.binwrite file_path, res
+    FileUtils.touch file_path, mtime: last_modified
+    puts "restored #{file_path} #{file_url}"
   }
 end
 
