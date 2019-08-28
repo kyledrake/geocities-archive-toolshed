@@ -45,6 +45,10 @@ def generate_template(neighborhood)
     # skip pages that never were started
     next if index_data.match(/I haven't started building my site yet/)
     next if index_data.match(/have not moved in yet/) && index_data.match(/The description of my page is/)
+
+    has_audio = false
+    has_audio = true if index_data.match(/src\s*=\s*["'](.+\.(wav|midi?))["']/i)
+
     mtime = File.mtime index_path
 
     # TODO investigate syntax errors and find better fix
@@ -63,7 +67,8 @@ def generate_template(neighborhood)
       relative_url: '/'+neighborhood+'/'+address,
       title: title,
       index_filename: index_filename,
-      last_updated: mtime
+      last_updated: mtime,
+      has_audio: has_audio
     }
 
     #puts index_path
@@ -77,4 +82,3 @@ NEIGHBORHOODS.keys.each do |neighborhood|
   generate_template neighborhood
   NEIGHBORHOODS[neighborhood].each {|sn| generate_template "#{neighborhood}/#{sn}"}
 end
-
