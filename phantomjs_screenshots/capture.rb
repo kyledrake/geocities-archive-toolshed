@@ -1,5 +1,5 @@
-if ARGV.length != 3
-  puts "usage: capture.rb base_path source_dir dest_dir"
+if ARGV.length != 2
+  puts "usage: capture.rb base_path dest_dir"
   exit
 end
 
@@ -15,9 +15,8 @@ require 'open3'
 require 'timeout'
 
 CORES = Etc.nprocessors
-BASE_PATH = ARGV[0] # /var/www/html
-SOURCE_DIR = ARGV[1] # www.geocities.com
-DEST_DIR = ARGV[2] # /var/www/html/screenshots
+BASE_PATH = ARGV[0] # /var/www/html/www.geocities.com
+DEST_DIR = ARGV[1] # /var/www/html/screenshots
 THREAD_COUNT = CORES
 HARD_TIMEOUT = 15
 
@@ -65,7 +64,9 @@ Find.find(ARGV[0]) do |path|
     out "#{url}: BAD\n"
     next
   end
-  output_path = File.join(DEST_DIR, url+'.png')
+  output_path = File.join DEST_DIR, url
+  output_path_png = output_path+'.png'
+  output_path_jpg = output_path+'.jpg'
 
 #  if File.exist?(output_path)
 #    out "#{url}: EXISTS\n"
@@ -74,17 +75,26 @@ Find.find(ARGV[0]) do |path|
   sleep 0.1 until pool.remaining_capacity > 0
 
   pool.post do
-    `timeout -k 5 #{HARD_TIMEOUT} #{Phantomjs.path} ./screenshot.js http://#{url} #{output_path}`
-    if !File.exist?(output_path)
+    `timeout -k 5 #{HARD_TIMEOUT} #{Phantomjs.path} ./screenshot.js http://#{url} #{output_path_png}`
+    if !File.exist?(output_path_png)
       out "#{url}: NO IMAGE\n"
       write_bad_url url
     else
-      # PhantomJS only makes transparent PNGs, we add a white background layer here.
-      image = MiniMagick::Image.open output_path
-      image.alpha 'remove'
-      image.alpha 'off'
-      image.format 'png'
-      image.write output_path
+      image = MiniMagick::Image.open output_path_png
+
+      # PhantomJS only makes transparent PNGs, we add a white background layer here if we're using PNG.
+      #image.alpha 'remove'
+      #image.alpha 'off'
+      #image.format 'png'
+      #image.write output_path
+
+      image.resize '640x480'
+      image.format 'jpg'
+      image.quality '90'
+      image.write output_path_jpg
+      FileUtils.rm output_path_png
+
+
       out "#{url}: DONE\n"
     end
   end
