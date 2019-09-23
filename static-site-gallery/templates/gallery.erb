@@ -34,7 +34,7 @@
         <% sites.each do |site| %>
           <div class="column col-3 col-xs-12">
             <div class="card">
-              <div class="card-image"><a href="<%= site[:relative_url] %>" target="_blank"><img class="img-responsive" src="/_assets/screenshots<%= site[:relative_url] %>/<%= site[:index_filename] %>.png"></a></div>
+              <div class="card-image"><a href="<%= site[:relative_url] %>" target="_blank"><img class="img-responsive" src="<%= site[:screenshot_path] %>"></a></div>
               <div class="card-header">
                 <div class="card-title text-ellipsis"><span style="display: inline-block; width: 90%" class="text-ellipsis"><a href="<%= site[:relative_url] %>" target="_blank"><%= site[:title] %></a></span> <% if site[:has_audio] %><span style="float: right;">A</span><% end %></div>
                 <div class="card-subtitle text-gray text-ellipsis"><small>www.geocities.com<%= site[:relative_url] %> <br>Last modified: <%= site[:last_updated].strftime('%F') %></small></div>

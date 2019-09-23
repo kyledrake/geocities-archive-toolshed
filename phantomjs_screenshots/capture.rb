@@ -16,7 +16,7 @@ require 'timeout'
 CORES = Etc.nprocessors
 BASE_PATH = ARGV[0] # /var/www/html/www.geocities.com
 DEST_DIR = ARGV[1] # /var/www/html/screenshots
-THREAD_COUNT = CORES
+THREAD_COUNT = CORES * 3
 HARD_TIMEOUT = 15
 
 if File.exist?('./bad-urls.txt')
@@ -48,6 +48,7 @@ pool = Concurrent::ThreadPoolExecutor.new(
 Find.find(ARGV[0]) do |path|
   begin
     next unless path =~ /\.html?$/
+    path.gsub!(/%7E/i, '~')
   rescue ArgumentError
     print "SKIPPING UTF8 ERROR"
     next
@@ -72,7 +73,7 @@ Find.find(ARGV[0]) do |path|
 
   pool.post do
     FileUtils.mkdir_p File.dirname(output_path_png)
-    `node screenshot.js file://#{File.join BASE_PATH, url} #{output_path_png} > /dev/null 2>&1`
+    `timeout -k 5 15 node screenshot.js #{File.join "http://geocities.gallery", url} #{output_path_png} > /dev/null 2>&1`
     if !File.exist?(output_path_png)
       out "#{url}: NO IMAGE\n"
       write_bad_url url
@@ -83,7 +84,7 @@ Find.find(ARGV[0]) do |path|
       #image.quality '90'
       #image.write output_path_jpg
       #FileUtils.rm output_path_png
-      out "#{url}: DONE\n"
+      out "#{url} -> #{output_path_png}: DONE\n"
     end
   end
 end
